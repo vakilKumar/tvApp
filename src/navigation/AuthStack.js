@@ -1,8 +1,8 @@
 import React from 'react';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import {LoginScreen} from '../screens';
 import About from '../screens/about';
-import Home from '../screens/Home';
+import GetStartPage from '../screens/getStart';
+import LoginScreen from '../screens/login';
 
 const Stack = createStackNavigator();
 
@@ -14,8 +14,9 @@ export const AuthStack = () => {
         headerShown: false,
         ...TransitionPresets.SlideFromRightIOS,
       }}>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="GetStartPage" component={GetStartPage} />
         <Stack.Screen name="About" component={About} />
+        <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
   );
 };

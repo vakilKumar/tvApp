@@ -9,10 +9,10 @@ const Home = ({navigation}) => {
         throw new Error('Test error');
       };
     return(
-        <View>
-            <Text>Home Screen</Text>
+        <View style={{backgroundColor:"white"}}>
+            <Text style={{color: 'black'}}>Home Screen</Text>
             <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                <Text>Go to About page</Text>
+                <Text style={{color: 'black'}}>Go to About page</Text>
             </TouchableOpacity>
         </View>
     )
