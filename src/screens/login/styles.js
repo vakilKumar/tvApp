@@ -1,17 +1,21 @@
 import {StyleSheet} from 'react-native';
 import {
-    responsiveHeight,
-    responsiveWidth,
-    responsiveFontSize,
-  } from 'react-native-responsive-dimensions';
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
 
 const styles = StyleSheet.create({
-
-    text: {
-        fontSize: responsiveFontSize(1),
-        color: '#fff',
-        textAlign: 'center'
-    },
+  normalText: {
+    fontSize: responsiveFontSize(1),
+    color: 'black',
+    // textAlign: 'center',
+  },
+  text: {
+    fontSize: responsiveFontSize(1),
+    color: '#fff',
+    textAlign: 'center',
+  },
   getStartImg: {
     height: responsiveHeight(80),
     width: responsiveWidth(80),
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
     flex: 1.5,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
-    backgroundColor: 'pink'
+    backgroundColor: 'pink',
   },
   empowerImg: {
     height: responsiveHeight(10),
@@ -31,8 +35,6 @@ const styles = StyleSheet.create({
 
   flexRow: {
     flexDirection: 'row',
-    // alignContent: 'center',
-    justifyContent: 'center'
   },
 
   getStartBtn: {
@@ -42,7 +44,23 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
     width: '70%',
-    alignSelf: 'center'
+    alignSelf: 'center',
+  },
+
+  radioBtn: {
+    height: 24,
+    width: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: 'green',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selectedRadioBtn: {
+    height: 12,
+    width: 12,
+    borderRadius: 6,
+    backgroundColor: 'green',
   },
 });
 export default styles;

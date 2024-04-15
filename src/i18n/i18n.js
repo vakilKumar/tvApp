@@ -20,40 +20,27 @@ i18n
   .use(languageDetector)
   .use(reactI18nextModule)
   .init({
-    fallbackLng: 'hi',
+    fallbackLng: 'en',
 
     resources: {
       en: {
         login: 'Login',
         register: 'Register',
-        common: {
-          currentLanguage: 'The current language is "{{lng}}"',
-        },
+        welcome: 'Welcome',
+        pleace_login: 'Pleace login to your',
+        account: 'account'
       },
       hi: {
         login: 'लॉग इन',
         register: 'पंजीकरण',
-        common: {
-          currentLanguage: 'Die Sprache ist auf "{{lng}}" gesetzt',
-          actions: {
-            toggleToGerman: 'Deutsch',
-            toggleToEnglish: 'English',
-            goToPage2: 'Öffne Seite 2',
-          },
-        },
+        welcome: ''
       },
     },
 
     // have a common namespace used around the full app
     ns: ['common'],
     defaultNS: 'common',
-
     debug: true,
-
-    // cache: {
-    //   enabled: true
-    // },
-
     interpolation: {
       escapeValue: false, // not needed for react as it does escape per default to prevent xss!
     },
