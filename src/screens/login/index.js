@@ -18,26 +18,17 @@ import empowering from '../../assets/images/empowering.png';
 import girl_with_laptop from '../../assets/images/girl_with_laptop.png';
 import styles from './styles';
 import theme from '../../theme';
-
-const userData = [
-  {
-    userName: 'Teacher',
-    id: 0,
-  },
-  {
-    userName: 'Admin',
-    id: 0,
-  },
-  {
-    userName: 'Student',
-    id: 0,
-  },
-];
+import '../../i18n/i18n.config'
 
 const LoginScreen = ({navigation}) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
-  const {t} = useTranslation();
+  const { t, i18n } = useTranslation();
+
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng); // Change language dynamically
+  };
 
   // const { t, i18n } = useTranslation(['home', 'common']);
 
@@ -76,18 +67,34 @@ const LoginScreen = ({navigation}) => {
           justifyContent: 'center',
           padding: 60
         }}>
+          {/* language chnage box */}
+          <View style={{position: 'absolute', right: 20, top: 20 }}> 
+          <TouchableOpacity
+         style={{backgroundColor: 'gray', padding: 5}}
+         onPress={() => {
+          changeLanguage('hi')
+        }}
+        >
+          <Text style={[styles.normalText, {textAlign: 'center'}]}> change to Hindi</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+        style={{backgroundColor: 'gray', padding: 5}}
+         onPress={() => {
+          changeLanguage('en')
+        }}
+        >
+          <Text style={[styles.normalText, {textAlign: 'center'}]}> change to English</Text>
+        </TouchableOpacity>
+          </View>
         <View style={styles.flexRow}>
           <TouchableOpacity
-            onPress={() => {
-              i18n.changeLanguage('hi');
-            }}
             style={{
               backgroundColor: 'green',
               padding: 5,
               borderRadius: 10,
               width: responsiveWidth(10),
             }}>
-            <Text style={styles.text}>{t('Login')}</Text>
+            <Text style={styles.text}>{t('login')}</Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text
