@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {
   FlatList,
   Image,
+  Platform,
   Text,
   TextInput,
   TouchableOpacity,
@@ -178,7 +179,7 @@ const LoginScreen = ({navigation}) => {
       <View style={{alignItems: 'flex-end'}}>
       <TouchableOpacity
             onPress={() => {
-              // i18n.changeLanguage('hi');
+              navigation.navigate('VideoPlayer')
             }}
             style={{
               backgroundColor: 'green',
