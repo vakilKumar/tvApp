@@ -10,7 +10,7 @@ const Home = ({navigation}) => {
       };
     return(
         <View style={{backgroundColor:"white"}}>
-            <Text style={{color: 'black'}}>Home Screen</Text>
+            <Text style={{color: 'black'}}>Home Screen </Text>
             <TouchableOpacity onPress={() => navigation.navigate('About')}>
                 <Text style={{color: 'black'}}>Go to About page</Text>
             </TouchableOpacity>
