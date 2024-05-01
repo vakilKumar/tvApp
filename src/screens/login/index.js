@@ -1,5 +1,8 @@
-import React, {useCallback, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
+import React, { useCallback, useState } from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   Platform,
@@ -13,28 +16,38 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 import empowering from '../../assets/images/empowering.png';
 import girl_with_laptop from '../../assets/images/girl_with_laptop.png';
 import styles from './styles';
 import theme from '../../theme';
 import '../../i18n/i18n.config'
+import { useDispatch, useSelector } from 'react-redux';
+// import { fetchDataFromDummyApiCreater } from '../../store/slice';
+import { dummyProfileSelector } from './redux/selector';
+import { fetchDataFromDummyApiCreater } from './redux/slice';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
+  const disptch = useDispatch()
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
   const { t, i18n } = useTranslation();
+  const apidata = useSelector(dummyProfileSelector.getDummyApiListData());
+  const loading = useSelector(dummyProfileSelector.getLoading())
+
+
+
+  console.log('=========>>>>>>>>> api data  <<<<<<<<<<<================', apidata)
 
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng); // Change language dynamically
   };
 
-  // const { t, i18n } = useTranslation(['home', 'common']);
 
   const handleMobileNumberChange = useCallback((e) => {
-          setMobileNumber(e)
+    setMobileNumber(e)
   }, [mobileNumber])
 
   const handlePasswordChange = useCallback((e) => {
@@ -46,6 +59,21 @@ const LoginScreen = ({navigation}) => {
         flex: 1,
         flexDirection: 'row',
       }}>
+
+      {
+
+        loading &&
+        <View
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            zIndex: 9
+          }}
+        >
+          <ActivityIndicator size={'large'} />
+        </View>
+      }
       <View style={styles.empowerImgDiv}>
         <View
           style={{
@@ -68,25 +96,25 @@ const LoginScreen = ({navigation}) => {
           justifyContent: 'center',
           padding: 60
         }}>
-          {/* language chnage box */}
-          <View style={{position: 'absolute', right: 20, top: 20 }}> 
+        {/* language chnage box */}
+        <View style={{ position: 'absolute', right: 20, top: 20 }}>
           <TouchableOpacity
-         style={{backgroundColor: 'gray', padding: 5}}
-         onPress={() => {
-          changeLanguage('hi')
-        }}
-        >
-          <Text style={[styles.normalText, {textAlign: 'center'}]}> change to Hindi</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-        style={{backgroundColor: 'gray', padding: 5}}
-         onPress={() => {
-          changeLanguage('en')
-        }}
-        >
-          <Text style={[styles.normalText, {textAlign: 'center'}]}> change to English</Text>
-        </TouchableOpacity>
-          </View>
+            style={{ backgroundColor: 'gray', padding: 5 }}
+            onPress={() => {
+              changeLanguage('hi')
+            }}
+          >
+            <Text style={[styles.normalText, { textAlign: 'center' }]}> change to Hindi</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{ backgroundColor: 'gray', padding: 5 }}
+            onPress={() => {
+              changeLanguage('en')
+            }}
+          >
+            <Text style={[styles.normalText, { textAlign: 'center' }]}> change to English</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.flexRow}>
           <TouchableOpacity
             style={{
@@ -97,7 +125,7 @@ const LoginScreen = ({navigation}) => {
             }}>
             <Text style={styles.text}>{t('login')}</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => disptch(fetchDataFromDummyApiCreater())}>
             <Text
               style={{
                 color: 'black',
@@ -109,10 +137,10 @@ const LoginScreen = ({navigation}) => {
             </Text>
           </TouchableOpacity>
         </View>
-        <Text style={{fontSize: responsiveFontSize(4), textAlign: 'left'}}>
+        <Text style={{ fontSize: responsiveFontSize(4), textAlign: 'left' }}>
           {t('welcome')}
         </Text>
-        <Text style={{textAlign: 'left'}}>
+        <Text style={{ textAlign: 'left' }}>
           <Text
             style={{
               fontSize: responsiveFontSize(1),
@@ -127,7 +155,7 @@ const LoginScreen = ({navigation}) => {
         </Text>
 
         {/* Radio button style */}
-        <View style={[styles.flexRow, {gap: 10, marginTop: responsiveHeight(2), marginBottom: responsiveHeight(2)}]}>
+        <View style={[styles.flexRow, { gap: 10, marginTop: responsiveHeight(2), marginBottom: responsiveHeight(2) }]}>
           <View style={styles.radioBtn}>
             <View style={styles.selectedRadioBtn} />
           </View>
@@ -149,37 +177,37 @@ const LoginScreen = ({navigation}) => {
             style={{
               borderBottomWidth: 1,
               borderBottomColor: '#000',
-              height: 40, 
-              paddingVertical: 8, 
-              paddingHorizontal: 10, 
+              height: 40,
+              paddingVertical: 8,
+              paddingHorizontal: 10,
             }}
             keyboardType='numeric'
             value={mobileNumber}
-            onChangeText={()=> handleMobileNumberChange()}
+            onChangeText={() => handleMobileNumberChange()}
           />
         </View>
-        <View style={{marginTop: responsiveHeight(2)}}>
+        <View style={{ marginTop: responsiveHeight(2) }}>
           <Text style={styles.normalText}>{'Password'}</Text>
           <TextInput
             style={{
               borderBottomWidth: 1,
               borderColor: '#000',
-              height: 40, 
-              paddingVertical: 8, 
-              paddingHorizontal: 10, 
+              height: 40,
+              paddingVertical: 8,
+              paddingHorizontal: 10,
             }}
             keyboardType='numeric'
             value={password}
-            onChangeText={()=> handlePasswordChange()}
+            onChangeText={() => handlePasswordChange()}
           />
         </View>
-       <TouchableOpacity style={{padding: 5}}>
-       <Text style={{fontSize: responsiveFontSize(1), color: 'pink', textDecorationLine: 'underline'}}>{'Forgot Password'}</Text>
-       </TouchableOpacity>
-      <View style={{alignItems: 'flex-end'}}>
-      <TouchableOpacity
+        <TouchableOpacity style={{ padding: 5 }}>
+          <Text style={{ fontSize: responsiveFontSize(1), color: 'pink', textDecorationLine: 'underline' }}>{'Forgot Password'}</Text>
+        </TouchableOpacity>
+        <View style={{ alignItems: 'flex-end' }}>
+          <TouchableOpacity
             onPress={() => {
-              navigation.navigate('VideoPlayer')
+              navigation.navigate('VideoPlayer');
             }}
             style={{
               backgroundColor: 'green',
@@ -189,7 +217,7 @@ const LoginScreen = ({navigation}) => {
             }}>
             <Text style={styles.text}>{t('Login')}</Text>
           </TouchableOpacity>
-      </View>
+        </View>
       </View>
     </View>
   );

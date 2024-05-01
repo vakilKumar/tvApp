@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { Text, TouchableOpacity, View } from "react-native"
 import { useDispatch } from "react-redux"
-import { fetchDataFromDummyApiCreater } from "../../store/slice";
+// import { fetchDataFromDummyApiCreater } from "../../store/slice";
 
 
 
@@ -10,8 +11,7 @@ const Home = () => {
 
 
     const handleClick = () => {
-         alert('call')
-        disptch(fetchDataFromDummyApiCreater())
+        // disptch(fetchDataFromDummyApiCreater())
     }
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useCallback } from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import empowering from '../../assets/images/empowering.png';

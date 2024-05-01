@@ -1,12 +1,13 @@
+/* eslint-disable prettier/prettier */
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "@redux-saga/core";
-import { dummyProfileReducer } from "./slice";
 import rootSaga from "./rootSaga";
+import { rootReducers } from "./reducers";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-        reducer: dummyProfileReducer,
+        reducer: rootReducers,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware)
 })
 

@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { all } from "redux-saga/effects";
-import { fetchDummyApiData } from "./saga";
+import { fetchDummyApiData } from "../screens/login/redux/saga";
 
 const rootSaga = function* () {
   yield all([
