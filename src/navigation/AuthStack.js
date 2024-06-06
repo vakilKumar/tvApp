@@ -4,6 +4,7 @@ import About from '../screens/about';
 import GetStartPage from '../screens/getStart';
 import LoginScreen from '../screens/login';
 import VideoPlayer from '../screens/videoPlayer';
+import QRcodeScanner from '../screens/qr-code';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export const AuthStack = () => {
         <Stack.Screen name="About" component={About} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
+        <Stack.Screen name="QRcodeScanner" component={QRcodeScanner} />
     </Stack.Navigator>
   );
 };

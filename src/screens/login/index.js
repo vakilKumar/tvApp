@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -27,18 +27,20 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { fetchDataFromDummyApiCreater } from '../../store/slice';
 import { dummyProfileSelector } from './redux/selector';
 import { fetchDataFromDummyApiCreater } from './redux/slice';
+import axios from 'axios';
 
 const LoginScreen = ({ navigation }) => {
   const disptch = useDispatch()
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [id, setId] = useState('')
   const { t, i18n } = useTranslation();
   const apidata = useSelector(dummyProfileSelector.getDummyApiListData());
   const loading = useSelector(dummyProfileSelector.getLoading())
 
 
 
-  console.log('=========>>>>>>>>> api data  <<<<<<<<<<<================', apidata)
+  // console.log('=========>>>>>>>>> api data  <<<<<<<<<<<================', apidata)
 
 
   const changeLanguage = (lng) => {
@@ -53,6 +55,49 @@ const LoginScreen = ({ navigation }) => {
   const handlePasswordChange = useCallback((e) => {
     setPassword(e)
   }, [password])
+
+const handleLogin = async () => {
+  console.log('=== call ===');
+  try {
+    const response =await axios.get('http://192.168.1.5:8000/generate-qr')
+    console.log('=response ===', response.data.sessionId)
+
+    setId(response.data.sessionId)
+  } catch (error) {
+    console.log('=== error ======', error);
+  }
+  // console.log('----- response --------', response);
+}
+
+const click = () => {
+  try {
+
+    const sessionId =  id; 
+        const socket = new WebSocket(`ws://192.168.1.5:8080/${sessionId}`); 
+
+    socket.onopen = () => {
+      console.log('WebSocket connection opened');
+      // setMessage('Connected to WebSocket server');
+  };
+
+  socket.onmessage = (event) => {
+      console.log('Message from server:', event.data);
+  };
+
+  // socket.onclose = () => {
+  //     console.log('WebSocket connection closed');
+  //     setMessage('WebSocket connection closed');
+  // };
+
+  socket.onerror = (error) => {
+      console.error('WebSocket error:', error);
+      // setMessage('WebSocket error');
+  };
+    
+  } catch (error) {
+    console.log('== error ===', error)
+  }
+}
   return (
     <View
       style={{
@@ -101,7 +146,8 @@ const LoginScreen = ({ navigation }) => {
           <TouchableOpacity
             style={{ backgroundColor: 'gray', padding: 5 }}
             onPress={() => {
-              changeLanguage('hi')
+              // click()
+              handleLogin()
             }}
           >
             <Text style={[styles.normalText, { textAlign: 'center' }]}> change to Hindi</Text>
@@ -206,8 +252,10 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
         <View style={{ alignItems: 'flex-end' }}>
           <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('VideoPlayer');
+            onPress={async () => {
+              navigation.navigate('QRcodeScanner');
+        // handleLogin()
+
             }}
             style={{
               backgroundColor: 'green',
