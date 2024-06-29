@@ -4,13 +4,15 @@ import { Provider } from 'react-redux';
 import store from './src/store';
 import { Router } from './src/navigation';
 import CustomErrorBoundary from './src/ErrorBoundary';
+import { TabBarNavigation } from './src/navigation/tab-bar-navigation';
 
 const App = () => {
 
   return (
     <CustomErrorBoundary>
       <Provider store={store}>
-        <Router />
+        {/* <Router /> */}
+        <TabBarNavigation />
       </Provider>
     </CustomErrorBoundary>
   );

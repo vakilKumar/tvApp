@@ -5,6 +5,7 @@ import GetStartPage from '../screens/getStart';
 import LoginScreen from '../screens/login';
 import VideoPlayer from '../screens/videoPlayer';
 import QRcodeScanner from '../screens/qr-code';
+import Landing from '../pages/landing';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ export const AuthStack = () => {
         headerShown: false,
         ...TransitionPresets.SlideFromRightIOS,
       }}>
+        <Stack.Screen name="Landing" component={Landing} />
         <Stack.Screen name="GetStartPage" component={GetStartPage} />
         <Stack.Screen name="About" component={About} />
         <Stack.Screen name="Login" component={LoginScreen} />
